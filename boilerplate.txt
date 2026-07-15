@@ -1,0 +1,42 @@
+suas_fast_orthomosaic/
+├─ README.md
+├─ pyproject.toml              # (veya requirements.txt)
+├─ configs/
+│  ├─ camera.yaml              # intrinsics + distortion (kalibrasyon çıktısı)
+│  ├─ pipeline.yaml            # fps, blur_thr, matcher, blending vb.
+│  └─ georef.yaml              # ground_res, altitude_mode, yaw_source vb.
+├─ data/
+│  ├─ raw/                     # uçuş verisi (ham)
+│  │  ├─ frames/               # frame_000001.jpg ...
+│  │  └─ telemetry.csv         # timestamp,lat,lon,alt,yaw,roll,pitch...
+│  ├─ processed/               # undistort + seçilmiş frame’ler
+│  └─ outputs/
+│     └─ map.png
+├─ src/
+│  └─ fastmosaic/
+│     ├─ __init__.py
+│     ├─ io/
+│     │  ├─ dataset.py         # dataset okuma/yazma, indexleme
+│     │  └─ telemetry.py       # CSV/JSON parse, time sync yardımcıları
+│     ├─ calib/
+│     │  ├─ calibrate.py       # checkerboard kalibrasyon
+│     │  └─ undistort.py       # undistort/rectify
+│     ├─ quality/
+│     │  └─ frame_select.py    # blur detection + örnekleme (0.3–0.5s)
+│     ├─ geo/
+│     │  ├─ projection.py      # lat/lon -> local ENU / meter
+│     │  └─ anchor.py          # GNSS anchor ile drift bastırma mantığı
+│     ├─ vision/
+│     │  ├─ features.py        # ORB/SIFT, descriptors
+│     │  ├─ match.py           # BF/FLANN matching + ratio test
+│     │  └─ homography.py      # RANSAC H, affine fallback
+│     ├─ mosaic/
+│     │  ├─ stitcher.py        # incremental stitching (frame frame ekle)
+│     │  └─ blend.py           # feathering / multiband blending
+│     ├─ export/
+│     │  └─ writer.py          # PNG/JPEG export, isimlendirme
+│     └─ cli.py                # komut satırı: preprocess / mosaic / all
+└─ scripts/
+   ├─ run_preprocess.py
+   ├─ run_mosaic.py
+   └─ run_all.py

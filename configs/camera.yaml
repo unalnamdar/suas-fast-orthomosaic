@@ -1,0 +1,18 @@
+# configs/camera.yaml
+# Example values. Replace with real calibration results later.
+
+image_width: 1920
+image_height: 1080
+
+# Camera intrinsic matrix K:
+# [ fx  0  cx ]
+# [  0 fy  cy ]
+# [  0  0   1 ]
+camera_matrix:
+  - [1000.0, 0.0, 960.0]
+  - [0.0, 1000.0, 540.0]
+  - [0.0, 0.0, 1.0]
+
+# Lens distortion coefficients (most common order):
+# [k1, k2, p1, p2, k3]
+dist_coefficients: [0.0, 0.0, 0.0, 0.0, 0.0]

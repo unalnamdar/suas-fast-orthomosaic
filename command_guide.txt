@@ -1,0 +1,22 @@
+Preprocessing:
+
+fastmosaic preprocess --in data/raw --processed data/processed --camera configs/camera.yaml
+
+
+
+Check preprocessed frames:
+
+dir data\processed\frames
+
+
+
+Create map.png:
+
+fastmosaic run --in data/processed --out data/outputs/map.png
+
+
+
+Crate map.png with SIFT:
+
+fastmosaic run-sift --in data/processed --out data/outputs/map_sift.png
+
